@@ -1,4 +1,6 @@
 import sqlite3
+from .schemas import UserCreate
+from passlib.context import CryptContext
 
 # SQLite database connection function
 def connect_db():
@@ -39,5 +41,59 @@ def create_tables():
 
     conn.commit()
     conn.close()
+    
+# Function to get a user by username
+def get_user_by_username(username: str):
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, username, role FROM users WHERE username = ?", (username,))
+    user = cursor.fetchone()
+    conn.close()
+
+    if user:
+        return {
+            "id": user[0],
+            "username": user[1],
+            "role": user[2]
+        }
+    return None
+
+# Function to get a password by username
+def get_password_by_username(username: str):
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT password FROM users WHERE username = ?", (username,))
+    password = cursor.fetchone()
+    conn.close()
+
+    if password:
+        return password[0]
+    return None
+
+# Create a password context for hashing and verifying passwords
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+def hash_password(password: str) -> str:
+    return pwd_context.hash(password)
+
+def create_user(user: UserCreate):
+    conn = connect_db()
+    cursor = conn.cursor()
+
+    # Hash the password before storing it
+    hashed_password = hash_password(user.password)
+
+    # Insert a new user into the users table
+    cursor.execute('''INSERT INTO users (username, role, password)
+                      VALUES (?, ?, ?)''', (user.username, user.role, hashed_password))
+    
+    conn.commit()
+    conn.close()
+
+    # Return the created user for confirmation
+    return {
+        "username": user.username,
+        "role": user.role
+    }
 
 create_tables()
