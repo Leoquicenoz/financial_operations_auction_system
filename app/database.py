@@ -22,22 +22,25 @@ def create_tables():
 
     # Create operations table
     cursor.execute('''CREATE TABLE IF NOT EXISTS operations (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        required_amount REAL NOT NULL,
-                        annual_interest REAL NOT NULL,
-                        limit_date TEXT NOT NULL,
-                        operator_id INTEGER NOT NULL,
-                        status BOOLEAN NOT NULL
-                      )''')
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    required_amount REAL NOT NULL,
+                    annual_interest REAL NOT NULL,
+                    limit_date TEXT NOT NULL,
+                    operator_id INTEGER NOT NULL,
+                    status INTEGER NOT NULL,
+                    FOREIGN KEY (operator_id) REFERENCES users (id)
+                  )''')
 
     # Create bids table
     cursor.execute('''CREATE TABLE IF NOT EXISTS bids (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        amount REAL NOT NULL,
-                        interest_rate REAL NOT NULL,
-                        operation_id INTEGER NOT NULL,
-                        FOREIGN KEY (operation_id) REFERENCES operations (id)
-                      )''')
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    amount REAL NOT NULL,
+                    interest_rate REAL NOT NULL,
+                    operation_id INTEGER NOT NULL,
+                    user_id INTEGER NOT NULL,
+                    FOREIGN KEY (operation_id) REFERENCES operations (id),
+                    FOREIGN KEY (user_id) REFERENCES users (id)
+                  )''')
 
     conn.commit()
     conn.close()

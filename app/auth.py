@@ -1,8 +1,12 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
-from fastapi import HTTPException
+from fastapi import HTTPException, Depends
+from fastapi.security import OAuth2PasswordBearer
+from .schemas import User
+from .database import get_password_by_username, get_user_by_username
 
+INVALID_TOKEN = "Invalid token"
 
 # Secret key for signing tokens
 SECRET_KEY = "mysecretkey"
@@ -11,6 +15,9 @@ ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
 # Context for password hashing
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+# Authentication token path
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
 
 # Verify password
 def verify_password(plain_password, hashed_password):
@@ -40,4 +47,20 @@ def decode_access_token(token: str):
             raise JWTError()
         return username
     except JWTError:
-        raise HTTPException(status_code=401, detail="Invalid token")
+        raise HTTPException(status_code=401, detail=INVALID_TOKEN)
+
+# Get current user based on token function
+def get_current_user(token: str = Depends(oauth2_scheme)) -> User:
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        username: str = payload.get("sub")
+        if username is None:
+            raise HTTPException(status_code=401, detail=INVALID_TOKEN)
+    except JWTError:
+        raise HTTPException(status_code=401, detail=INVALID_TOKEN)
+
+    user_data = get_user_by_username(username)
+    if user_data is None:
+        raise HTTPException(status_code=401, detail="User not found")
+    
+    return User(**user_data)
