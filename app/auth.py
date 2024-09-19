@@ -1,15 +1,19 @@
+import os
 from passlib.context import CryptContext
 from datetime import datetime, timedelta, timezone
 from jose import JWTError, jwt
 from fastapi import HTTPException, Depends
 from fastapi.security import OAuth2PasswordBearer
+from dotenv import load_dotenv
 from .schemas import User
 from .database import get_password_by_username, get_user_by_username
+
+load_dotenv()
 
 INVALID_TOKEN = "Invalid token"
 
 # Secret key for signing tokens
-SECRET_KEY = "mysecretkey"
+SECRET_KEY = os.environ.get("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 

@@ -1,3 +1,5 @@
+uvicorn
+fastapi
 pydantic
 passlib
 python-jose
@@ -5,3 +7,4 @@ pytz
 python-multipart
 pytest
 httpx
+python-dotenv

@@ -1,0 +1,15 @@
+curl -X 'POST' \
+  'http://127.0.0.1:8000/register' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "username": "Julian",
+  "password": "juli",
+  "role": "Investor"
+}'
+
+curl -X 'POST' \
+  'http://127.0.0.1:8000/token' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -d 'grant_type=password&username=Julian&password=juli&scope=&client_id=&client_secret='
