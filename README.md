@@ -175,8 +175,8 @@ A token must be generated to authorize registered users to create operations or 
 
 <summary>Login using token</summary>
 
-To log in and be able to use the features that require authorization, you must click on the lock button at the top right of the *Operations* and *Bids* endpoints.
-In the “`client_secret`” field you must enter the token generated for the user you want to log in (bear in mind that the token lasts 30 minutes, after this time a new one must be generated).
+To login and be able to use the features that require authorization, you must click on the lock button at the top right of the *Operations* and *Bids* endpoints.
+In the “`client_secret`” field you must enter the token generated for the user you want to login (bear in mind that the token lasts 30 minutes, after this time a new one must be generated).
 
 <img src="https://github.com/user-attachments/assets/c50d817e-82eb-44b7-8b1e-60dee99cf8cf" width="400">
 
@@ -218,9 +218,13 @@ Any user can make these three requests:
 
 ## Testing
 
+In the root of the project it executes:
 
+```python
+pytest
+```
 
-
+This will run all the tests automatically.
 
 
 Author: Leonardo Quiceno| 2024
