@@ -184,8 +184,40 @@ In the “`client_secret`” field you must enter the token generated for the us
 
 </details>
 
+<details>
+
+<summary>Create operations and Bids</summary>
+
+Once the user is logged in can proceed to create operations or place bids. If the user is an Operator can create operations and if is an Investor can place bids on existing operations.
+
+<img src="https://github.com/user-attachments/assets/854b39a1-59a0-424d-a71b-22e69b7776ab" width="800">
+
+<img src="https://github.com/user-attachments/assets/492c6cf6-1d12-4e8d-bb13-649f82f0260b" width="800">
+
+</details>
+
+<details>
+
+<summary>Requests</summary>
+
+Any user can make these three requests:
+
+1. **List active operations**: The result of this query will deliver a list of the operations that are open at that moment, each operation will have 5 data corresponding to: `operation id`, `amount`, `annual interest` and `operator id`.
+
+<img src="https://github.com/user-attachments/assets/7186e648-e460-48ea-adaf-b62d3c20d5ce" width="800">
+
+2. **Show specific operation**: The `operation id` is used to filter and show only the required operation.
+
+<img src="https://github.com/user-attachments/assets/ec3d1b54-a79c-44e8-be23-726661985f88" width="800">
+
+3. **Show bids by operation**: The `operation id` is used to filter and display the bids that have been placed on this specific operation.
+
+<img src="https://github.com/user-attachments/assets/4b472fbe-7a6a-4c5a-834e-dfe7780d5455" width="800">
+
+</details>
 
 ## Testing
+
 
 
 
