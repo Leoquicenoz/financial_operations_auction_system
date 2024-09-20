@@ -131,7 +131,7 @@ This indicates that the app is ready for use!!!
 
 ## Usage
 
-Open the browser and go to 
+Open the browser and go to:
 
 ```python
 http://localhost:8000/docs
@@ -139,9 +139,50 @@ http://localhost:8000/docs
 
 You will see the following interface
 
+<img src="https://github.com/user-attachments/assets/b31d87e6-104a-449e-a643-5de6d87ad3c6" width="800">
 
+<details>
 
+<summary>Register users</summary>
 
+To register users you need to assign: `username`, `password` and `role` (the only options available in this field are *Operator*/*Investor*).
+
+You can do it using directly the end point with the “*Try it out*” option and entering the values directly, after that you press the “*Execute*” button.
+
+<img src="https://github.com/user-attachments/assets/df6ddbdf-7961-4a75-a1ee-9bd6618da54b" width="800">
+
+<img src="https://github.com/user-attachments/assets/e4673e92-171c-4fc0-83a4-451a56483334" width="800">
+
+Or using a tool such as Postman
+
+<img src="https://github.com/user-attachments/assets/9eec74dc-7b70-426c-b672-85c2441946a1" width="800">
+
+</details>
+
+<details>
+
+<summary>Token generation</summary>
+
+A token must be generated to authorize registered users to create operations or place bids, depending on the user's role.
+
+<img src="https://github.com/user-attachments/assets/4f886b07-817e-48bb-ae8a-4088be84ea75" width="800">
+
+<img src="https://github.com/user-attachments/assets/32cfb72d-0fa8-4176-a2e9-70134e9ff372" width="800">
+
+</details>
+
+<details>
+
+<summary>Login using token</summary>
+
+To log in and be able to use the features that require authorization, you must click on the lock button at the top right of the *Operations* and *Bids* endpoints.
+In the “`client_secret`” field you must enter the token generated for the user you want to log in (bear in mind that the token lasts 30 minutes, after this time a new one must be generated).
+
+<img src="https://github.com/user-attachments/assets/c50d817e-82eb-44b7-8b1e-60dee99cf8cf" width="400">
+
+<img src="https://github.com/user-attachments/assets/ac9d3c1d-3f8c-4ee1-943a-6fc3b9bf8ea4" width="400">
+
+</details>
 
 
 ## Testing
@@ -151,3 +192,4 @@ You will see the following interface
 
 
 Author: Leonardo Quiceno| 2024
+ 
